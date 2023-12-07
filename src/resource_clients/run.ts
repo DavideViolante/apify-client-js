@@ -53,6 +53,13 @@ export class RunClient extends ResourceClient {
     }
 
     /**
+     * https://docs.apify.com/api/v2#/reference/actor-runs/delete-run/delete-run
+     */
+    async delete(): Promise<void> {
+        return this._delete();
+    }
+
+    /**
      * https://docs.apify.com/api/v2#/reference/actor-runs/metamorph-run/metamorph-run
      */
     async metamorph(targetActorId: string, input: unknown, options: RunMetamorphOptions = {}): Promise<ActorRun> {
@@ -87,6 +94,19 @@ export class RunClient extends ResourceClient {
                 'content-type': options.contentType,
             };
         }
+
+        const response = await this.httpClient.call(request);
+        return cast(parseDateFields(pluckData(response.data)));
+    }
+
+    /**
+     * https://docs.apify.com/api/v2#/reference/actor-runs/reboot-run/reboot-run
+     */
+    async reboot(): Promise<ActorRun> {
+        const request: AxiosRequestConfig = {
+            url: this._url('reboot'),
+            method: 'POST',
+        };
 
         const response = await this.httpClient.call(request);
         return cast(parseDateFields(pluckData(response.data)));

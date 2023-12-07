@@ -2,6 +2,7 @@ import util from 'util';
 import zlib from 'zlib';
 import ow from 'ow';
 import type { TypedArray, JsonValue } from 'type-fest';
+import type { Readable } from 'node:stream';
 import { ApifyApiError } from './apify_api_error';
 import { WebhookUpdateData } from './resource_clients/webhook';
 import {
@@ -58,7 +59,12 @@ export function parseDateFields(input: JsonValue, depth = 0): ReturnJsonValue {
     return Object.entries(input).reduce((output, [k, v]) => {
         const isValObject = !!v && typeof v === 'object';
         if (k.endsWith(PARSE_DATE_FIELDS_KEY_SUFFIX)) {
-            output[k] = v ? new Date(v as string) : v;
+            if (v) {
+                const d = new Date(v as string);
+                output[k] = Number.isNaN(d.getTime()) ? v as string : d;
+            } else {
+                output[k] = v;
+            }
         } else if (isValObject || Array.isArray(v)) {
             output[k] = parseDateFields(v!, depth + 1);
         } else {
@@ -110,7 +116,7 @@ export function isBuffer(value: unknown): value is Buffer | ArrayBuffer | TypedA
     return ow.isValid(value, ow.any(ow.buffer, ow.arrayBuffer, ow.typedArray));
 }
 
-export function isStream(value: unknown): value is ReadableStream {
+export function isStream(value: unknown): value is Readable {
     return ow.isValid(value, ow.object.hasKeys('on', 'pipe'));
 }
 
@@ -195,3 +201,5 @@ export function cast<T>(input: unknown): T {
 }
 
 export type Dictionary<T = unknown> = Record<PropertyKey, T>;
+
+export type DistributiveOptional<T, K extends keyof T> = T extends any ? Omit<T, K> & Partial<Pick<T, K>> : never;
