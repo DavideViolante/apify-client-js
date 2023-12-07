@@ -9,6 +9,7 @@ import {
     parseDateFields,
     catchNotFoundOrThrow,
     cast,
+    DistributiveOptional,
 } from '../utils';
 
 export class ScheduleClient extends ResourceClient {
@@ -91,8 +92,9 @@ export type ScheduleCreateOrUpdateData = Partial<
         | 'isEnabled'
         | 'isExclusive'
         | 'description'
-        | 'actions'
-    >
+    > & {
+        actions: DistributiveOptional<ScheduleAction, 'id'>[]
+    }
 >;
 
 export enum ScheduleActions {
