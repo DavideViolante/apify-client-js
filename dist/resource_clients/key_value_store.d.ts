@@ -1,5 +1,7 @@
 /// <reference types="node" />
+/// <reference types="node" />
 import { JsonValue } from 'type-fest';
+import type { Readable } from 'node:stream';
 import { ApiClientSubResourceOptions } from '../base/api_client';
 import { ResourceClient } from '../base/resource_client';
 export declare class KeyValueStoreClient extends ResourceClient {
@@ -99,5 +101,5 @@ export interface KeyValueStoreRecord<T> {
     value: T;
     contentType?: string;
 }
-export type ReturnTypeFromOptions<Options extends KeyValueClientGetRecordOptions> = Options['stream'] extends true ? ReadableStream : Options['buffer'] extends true ? Buffer : JsonValue;
+export type ReturnTypeFromOptions<Options extends KeyValueClientGetRecordOptions> = Options['stream'] extends true ? Readable : Options['buffer'] extends true ? Buffer : JsonValue;
 //# sourceMappingURL=key_value_store.d.ts.map

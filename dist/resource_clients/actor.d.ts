@@ -88,7 +88,6 @@ export interface Actor {
     deploymentKey: string;
     title?: string;
     taggedBuilds?: ActorTaggedBuilds;
-    issuesEnabled?: boolean;
     seoTitle?: string;
     seoDescription?: string;
     categories?: string[];
@@ -120,7 +119,7 @@ export interface ActorTaggedBuild {
     buildNumber?: string;
     finishedAt?: Date;
 }
-export type ActorUpdateOptions = Partial<Pick<Actor, 'name' | 'description' | 'isPublic' | 'seoTitle' | 'seoDescription' | 'issuesEnabled' | 'title' | 'restartOnError' | 'versions' | 'categories' | 'defaultRunOptions'>>;
+export type ActorUpdateOptions = Partial<Pick<Actor, 'name' | 'description' | 'isPublic' | 'seoTitle' | 'seoDescription' | 'title' | 'restartOnError' | 'versions' | 'categories' | 'defaultRunOptions'>>;
 export interface ActorStartOptions {
     /**
      * Tag or number of the actor build to run (e.g. `beta` or `1.2.345`).

@@ -48,7 +48,13 @@ function parseDateFields(input, depth = 0) {
     return Object.entries(input).reduce((output, [k, v]) => {
         const isValObject = !!v && typeof v === 'object';
         if (k.endsWith(PARSE_DATE_FIELDS_KEY_SUFFIX)) {
-            output[k] = v ? new Date(v) : v;
+            if (v) {
+                const d = new Date(v);
+                output[k] = Number.isNaN(d.getTime()) ? v : d;
+            }
+            else {
+                output[k] = v;
+            }
         }
         else if (isValObject || Array.isArray(v)) {
             output[k] = parseDateFields(v, depth + 1);

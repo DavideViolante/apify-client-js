@@ -1,5 +1,7 @@
 /// <reference types="node" />
+/// <reference types="node" />
 import type { TypedArray, JsonValue } from 'type-fest';
+import type { Readable } from 'node:stream';
 import { ApifyApiError } from './apify_api_error';
 import { WebhookUpdateData } from './resource_clients/webhook';
 import { RequestQueueClientListRequestsOptions, RequestQueueClientListRequestsResult } from './resource_clients/request_queue';
@@ -35,7 +37,7 @@ export declare function stringifyWebhooksToBase64(webhooks: WebhookUpdateData[])
 export declare function maybeGzipValue(value: unknown): Promise<Buffer | undefined>;
 export declare function isNode(): boolean;
 export declare function isBuffer(value: unknown): value is Buffer | ArrayBuffer | TypedArray;
-export declare function isStream(value: unknown): value is ReadableStream;
+export declare function isStream(value: unknown): value is Readable;
 export declare function getVersionData(): {
     version: string;
 };
@@ -76,5 +78,6 @@ export interface PaginatedList<Data> {
 }
 export declare function cast<T>(input: unknown): T;
 export type Dictionary<T = unknown> = Record<PropertyKey, T>;
+export type DistributiveOptional<T, K extends keyof T> = T extends any ? Omit<T, K> & Partial<Pick<T, K>> : never;
 export {};
 //# sourceMappingURL=utils.d.ts.map

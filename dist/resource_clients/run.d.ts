@@ -19,9 +19,17 @@ export declare class RunClient extends ResourceClient {
      */
     abort(options?: RunAbortOptions): Promise<ActorRun>;
     /**
+     * https://docs.apify.com/api/v2#/reference/actor-runs/delete-run/delete-run
+     */
+    delete(): Promise<void>;
+    /**
      * https://docs.apify.com/api/v2#/reference/actor-runs/metamorph-run/metamorph-run
      */
     metamorph(targetActorId: string, input: unknown, options?: RunMetamorphOptions): Promise<ActorRun>;
+    /**
+     * https://docs.apify.com/api/v2#/reference/actor-runs/reboot-run/reboot-run
+     */
+    reboot(): Promise<ActorRun>;
     update(newFields: RunUpdateOptions): Promise<ActorRun>;
     /**
      * https://docs.apify.com/api/v2#/reference/actor-runs/resurrect-run/resurrect-run

@@ -118,8 +118,8 @@ class DatasetClient extends resource_client_1.ResourceClient {
             items: response.data,
             total: Number(response.headers['x-apify-pagination-total']),
             offset: Number(response.headers['x-apify-pagination-offset']),
-            count: response.data.length,
-            limit: Number(response.headers['x-apify-pagination-limit']),
+            count: response.data.length, // because x-apify-pagination-count returns invalid values when hidden/empty items are skipped
+            limit: Number(response.headers['x-apify-pagination-limit']), // API returns 999999999999 when no limit is used
             // TODO: Replace this once https://github.com/apify/apify-core/issues/3503 is solved
             desc: JSON.parse((_a = response.headers['x-apify-pagination-desc']) !== null && _a !== void 0 ? _a : userProvidedDesc),
         };

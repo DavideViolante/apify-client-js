@@ -44,11 +44,13 @@ export interface Webhook {
     lastDispatch: string;
     stats: WebhookStats;
     shouldInterpolateStrings: boolean;
+    headersTemplate?: string;
+    description?: string;
 }
 export interface WebhookIdempotencyKey {
     idempotencyKey?: string;
 }
-export type WebhookUpdateData = Partial<Pick<Webhook, 'isAdHoc' | 'eventTypes' | 'condition' | 'ignoreSslErrors' | 'doNotRetry' | 'requestUrl' | 'payloadTemplate' | 'shouldInterpolateStrings'>> & WebhookIdempotencyKey;
+export type WebhookUpdateData = Partial<Pick<Webhook, 'isAdHoc' | 'eventTypes' | 'condition' | 'ignoreSslErrors' | 'doNotRetry' | 'requestUrl' | 'payloadTemplate' | 'shouldInterpolateStrings' | 'headersTemplate' | 'description'>> & WebhookIdempotencyKey;
 export interface WebhookStats {
     totalDispatches: number;
 }

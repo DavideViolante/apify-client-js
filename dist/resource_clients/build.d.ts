@@ -15,6 +15,10 @@ export declare class BuildClient extends ResourceClient {
      */
     abort(): Promise<Build>;
     /**
+     * https://docs.apify.com/api/v2#/reference/actor-builds/delete-build/delete-build
+     */
+    delete(): Promise<void>;
+    /**
      * Returns a promise that resolves with the finished Build object when the provided actor build finishes
      * or with the unfinished Build object when the `waitSecs` timeout lapses. The promise is NOT rejected
      * based on run status. You can inspect the `status` property of the Build object to find out its status.

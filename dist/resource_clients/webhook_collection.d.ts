@@ -10,7 +10,7 @@ export declare class WebhookCollectionClient extends ResourceCollectionClient {
     /**
      * https://docs.apify.com/api/v2#/reference/webhooks/webhook-collection/get-list-of-webhooks
      */
-    list(options?: WebhookCollectionListOptions): Promise<PaginatedList<Omit<Webhook, 'payloadTemplate'>>>;
+    list(options?: WebhookCollectionListOptions): Promise<PaginatedList<Omit<Webhook, 'payloadTemplate' | 'headersTemplate'>>>;
     /**
      * https://docs.apify.com/api/v2#/reference/webhooks/webhook-collection/create-webhook
      */

@@ -1,6 +1,7 @@
 import { ApiClientSubResourceOptions } from '../base/api_client';
 import { ResourceClient } from '../base/resource_client';
 import { Timezone } from '../timezones';
+import { DistributiveOptional } from '../utils';
 export declare class ScheduleClient extends ResourceClient {
     /**
      * @hidden
@@ -39,7 +40,9 @@ export interface Schedule {
     lastRunAt: string;
     actions: ScheduleAction[];
 }
-export type ScheduleCreateOrUpdateData = Partial<Pick<Schedule, 'name' | 'title' | 'cronExpression' | 'timezone' | 'isEnabled' | 'isExclusive' | 'description' | 'actions'>>;
+export type ScheduleCreateOrUpdateData = Partial<Pick<Schedule, 'name' | 'title' | 'cronExpression' | 'timezone' | 'isEnabled' | 'isExclusive' | 'description'> & {
+    actions: DistributiveOptional<ScheduleAction, 'id'>[];
+}>;
 export declare enum ScheduleActions {
     RunActor = "RUN_ACTOR",
     RunActorTask = "RUN_ACTOR_TASK"

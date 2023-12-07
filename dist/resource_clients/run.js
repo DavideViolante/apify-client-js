@@ -43,6 +43,12 @@ class RunClient extends resource_client_1.ResourceClient {
         return (0, utils_1.cast)((0, utils_1.parseDateFields)((0, utils_1.pluckData)(response.data)));
     }
     /**
+     * https://docs.apify.com/api/v2#/reference/actor-runs/delete-run/delete-run
+     */
+    async delete() {
+        return this._delete();
+    }
+    /**
      * https://docs.apify.com/api/v2#/reference/actor-runs/metamorph-run/metamorph-run
      */
     async metamorph(targetActorId, input, options = {}) {
@@ -73,6 +79,17 @@ class RunClient extends resource_client_1.ResourceClient {
                 'content-type': options.contentType,
             };
         }
+        const response = await this.httpClient.call(request);
+        return (0, utils_1.cast)((0, utils_1.parseDateFields)((0, utils_1.pluckData)(response.data)));
+    }
+    /**
+     * https://docs.apify.com/api/v2#/reference/actor-runs/reboot-run/reboot-run
+     */
+    async reboot() {
+        const request = {
+            url: this._url('reboot'),
+            method: 'POST',
+        };
         const response = await this.httpClient.call(request);
         return (0, utils_1.cast)((0, utils_1.parseDateFields)((0, utils_1.pluckData)(response.data)));
     }
